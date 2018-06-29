@@ -12,4 +12,6 @@ app.use(express.static("public"));
 app.use("/", require("./routes/index"));
 app.use("/fortnite", require("./routes/fortnite"));
 
+new (require("./fortniteapi/StatTracker"))();
+
 app.listen(process.env.PORT || 3000);
