@@ -2,79 +2,52 @@
     <div class="col-12">
         <div class="row">
             <div class="col-md-4 offset-sm-4">
-                <div class="card text-white bg-warning mb-3 animated fadeInDown">
-                    <div class="card-header">ELLIOT</div>
+                <div class="card text-white bg-<%= data.houseColors[data.houses[0]] %> mb-3 animated fadeInDown">
+                    <div class="card-header"><%= data.houses[0].toUpperCase() %></div>
                     <div class="card-body text-center">
                         <i class="fas fa-trophy fa-7x"></i>
                         <hr />
-                        <h4 class="card-title">152 Wins</h4>
-                        <p class="card-text">Last win was Scott Hiett, at 2:32pm</p>
+                        <h4 class="card-title"><%= data.houseTotalScores[data.houses[0]] %> Points</h4>
+                        <p class="card-text"><%= data.houseTotalWins[data.houses[0]] %> total wins</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card text-white bg-primary mb-3 animated fadeInDown" style="animation-delay: 0.2s;">
-                    <div class="card-header">CARTER</div>
-                    <div class="card-body text-center">
-                        <i class="fas fa-trophy fa-5x"></i>
-                        <hr />
-                        <h4 class="card-title">152 Wins</h4>
-                        <p class="card-text">Last win was Scott Hiett, at 2:32pm</p>
+            <% var delay = 1 %>
+            <% data.houses.forEach(function(house) { %>
+                <% if(house !== data.houses[0]) { %>
+                    <% delay++ %>
+                    <div class="col-sm-3">
+                        <div class="card text-white bg-<%= data.houseColors[house] %> mb-3 animated fadeInDown" style="animation-delay: 0.<%= delay %>s;">
+                            <div class="card-header"><%= house.toUpperCase() %></div>
+                            <div class="card-body text-center">
+                                <i class="fas fa-trophy fa-5x"></i>
+                                <hr />
+                                <h4 class="card-title"><%= data.houseTotalScores[house] %> Points</h4>
+                                <p class="card-text"><%= data.houseTotalWins[house] %> total wins</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card text-white bg-success mb-3 animated fadeInDown" style="animation-delay: 0.3s;">
-                    <div class="card-header">GREENSTREET</div>
-                    <div class="card-body text-center">
-                        <i class="fas fa-trophy fa-5x"></i>
-                        <hr />
-                        <h4 class="card-title">152 Wins</h4>
-                        <p class="card-text">Last win was Scott Hiett, at 2:32pm</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card text-white bg-danger mb-3 animated fadeInDown" style="animation-delay: 0.4s;">
-                    <div class="card-header">FULLER</div>
-                    <div class="card-body text-center">
-                        <i class="fas fa-trophy fa-5x"></i>
-                        <hr />
-                        <h4 class="card-title">152 Wins</h4>
-                        <p class="card-text">Last win was Scott Hiett, at 2:32pm</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card text-white bg-info mb-3 animated fadeInDown" style="animation-delay: 0.5s;">
-                    <div class="card-header">BENNET</div>
-                    <div class="card-body text-center">
-                        <i class="fas fa-trophy fa-5x"></i>
-                        <hr />
-                        <h4 class="card-title">152 Wins</h4>
-                        <p class="card-text">Last win was Scott Hiett, at 2:32pm</p>
-                    </div>
-                </div>
-            </div>
+                <% } %>
+            <% }); %>
         </div>
     </div>
     <div class="col-12">
         <hr />
-        <h2 class="animated fadeIn" style="animation-delay: 0.7s;">Breakdown of Wins</h2>
+        <h2 class="animated fadeIn" style="animation-delay: 0.7s;">Percentage Share of Points</h2>
         <br />
         <div class="progress animated flipInX" style="animation-delay: 0.8s;">
-            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-default" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            <% data.houses.forEach(function(house) { %>
+                <% var percentage = data.houseTotalScores[house] / (data.houseTotalScores.carter + data.houseTotalScores.elliot + data.houseTotalScores.greenstreet + data.houseTotalScores.fuller + data.houseTotalScores.bennet) * 100 %>
+                <div class="progress-bar bg-<%= data.houseColors[house] %>" role="progressbar" style="width: <%= percentage %>%" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+            <% }); %>
         </div>
 
         <hr />
     </div>
-    <div class="col-12">
+    <div class="col-12 animated fadeIn" style="animation-delay: 1s;">
         <h2>Key Players</h2>
 
         <table class="table table-hover">
@@ -83,17 +56,30 @@
                     <th scope="col">Name</th>
                     <th scope="col">Form</th>
                     <th scope="col">Wins</th>
-                    <th scope="col">Position</th>
+                    <th scope="col">Points</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">Scott Hiett</th>
-                    <td>Elliot</td>
-                    <td>142</td>
-                    <td>#1</td>
-                </tr>
+                <% data.leaderboard.forEach(function(leaderboardItem) { %>
+                    <tr>
+                        <th scope="row"><%= leaderboardItem.name %></th>
+                        <td><%= leaderboardItem.form %></td>
+                        <td><%= leaderboardItem.wins %></td>
+                        <td><%= leaderboardItem.points %></td>
+                    </tr>
+                <% }); %>
             </tbody>
         </table>
     </div>
+    <!--<div class="col-12">-->
+        <!--<h1>Test Input Form</h1>-->
+        <!--<form action="/addfortniteuser" method="post">-->
+            <!--<input type="text" name="fullName" placeholder="Full Name">-->
+            <!--<input type="text" name="marlingForm" placeholder="Form">-->
+            <!--<input type="text" name="username" placeholder="Epic Username">-->
+            <!--<input type="text" name="platform" placeholder="Platform">-->
+
+            <!--<input type="submit" class="btn btn-success">-->
+        <!--</form>-->
+    <!--</div>-->
 </div>

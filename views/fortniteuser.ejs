@@ -1,0 +1,12 @@
+<h1>Stats for <%= statData.info.username %></h1>
+<hr />
+<p>Solo Kills (all time): <%= statData.group.solo.kills %></p>
+<p>Solo Kills (in this comp.): <%= (statData.group.solo.kills - oldStatData.group.solo.kills) %></p>
+<hr />
+<p>Duo Kills (all time): <%= statData.group.duo.kills %></p>
+<p>Duo Kills (in this comp.): <%= (statData.group.duo.kills - oldStatData.group.duo.kills) %></p>
+<hr />
+<p>Squad Kills (all time): <%= statData.group.squad.kills %></p>
+<p>Squad Kills (in this comp.): <%= (statData.group.squad.kills - oldStatData.group.squad.kills) %></p>
+<hr />
+<h3>Total Points: <%= statData.points %></h3>
